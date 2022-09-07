@@ -1,6 +1,7 @@
 import sqlite3
-import init_db
 from db_config import DATABASE_FILENAME
+from os.path import exists
+
 
 def execute(command):
     with sqlite3.connect(DATABASE_FILENAME) as con:
@@ -44,6 +45,7 @@ def menu():
         print("Not an option")
     else:
         options[selection]["action"]()
-
+if not exists(DATABASE_FILENAME):
+    import init_db
 while not stop:
     menu()
